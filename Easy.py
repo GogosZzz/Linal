@@ -88,6 +88,7 @@ def factorint_mine(num: int) -> Dict[int, int]:
 sieve_list = sieve(10 ** 6)
 
 
+
 # =========Задача 1===========
 def palindromic_squares_and_circular_primes() -> tuple[List[int], List[int]]:
     """
@@ -255,7 +256,7 @@ def euler_phi_factor(n: int) -> int:
     result = n
     factors = factorint_mine(n)
     for p in factors:
-        result *= (1-1/p)
+        result *= (1 - 1 / p)
     return int(result)
 
 
