@@ -2,7 +2,7 @@ from itertools import product
 from typing import List, Tuple, Dict
 import math
 import time
-from sympy import factorint
+from sympy import factorint, totient
 
 
 def is_prime(num: int) -> bool:
@@ -282,7 +282,7 @@ def compare_euler_phi_methods(test_values: List[int]) -> dict:
 
         # Метод 3: sympy
         start = time.time()
-        sympy.totient(n)
+        totient(n)
         times_sympy.append(time.time() - start)
 
     return {
@@ -304,7 +304,31 @@ primes_dict = primes_with_two_digits()
 for key, primes in primes_dict.items():
     print(f"{key}: {primes[:]}")
 # 4
-print("\n=== Задача 4: Простые-близнецы ===")
+print("\nзадача №4")
 twins, ratios = twin_primes_analysis(100)
-print(f"Первые 5 пар близнецов: {twins[:]}")
-print(f"Последние 5 отношений: {ratios[:]}")
+print(twins[:])
+print(ratios[:])
+#5
+print('\nзадача №5')
+factors_dict = factorial_plus_one_factors()
+max_distinct = 0
+n_with_large_prime = []
+for n, factors in factors_dict.items():
+    distinct_count = len(factors)
+    if distinct_count > max_distinct:
+        max_distinct = distinct_count
+
+    large_primes = [p for p in factors if p > 10 ** 6]
+    if large_primes:
+        n_with_large_prime.append((n, large_primes))
+print(f"Максимальное количество различных простых делителей: {max_distinct}")
+print(f"n! + 1 с большими простыми множителями (> 10^6): {n_with_large_prime}")
+#6
+print("\nзадача №6")
+test_values = [10, 100, 1000, 10000]
+times = compare_euler_phi_methods(test_values)
+
+for i, n in enumerate(test_values):
+    print(f"n = {n}: прямой = {times['direct'][i]:.6f}s, "
+          f"разложение = {times['factor'][i]:.6f}s, "
+          f"sympy = {times['sympy'][i]:.6f}s")
