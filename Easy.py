@@ -1,8 +1,8 @@
-import itertools
+from itertools import product
 from typing import List, Tuple, Dict
 import math
 import time
-import sympy
+from sympy import factorint
 
 
 def is_prime(num: int) -> bool:
@@ -169,7 +169,7 @@ def primes_with_two_digits() -> Dict[str, List[int]]:
 
         # Генерируем числа увеличивающейся длины, пока не наберем 100 простых
         while len(primes_list) < 100:
-            for comb in itertools.product([d1, d2], repeat=length):
+            for comb in product([d1, d2], repeat=length):
                 num_str = ''.join(comb)
                 num = int(num_str)
 
@@ -231,7 +231,7 @@ def factorial_plus_one_factors() -> Dict[int, Dict[int, int]]:
 
     for n in range(2, 51):
         factorial = math.factorial(n) + 1
-        factors = sympy.factorint(factorial)
+        factors = factorint(factorial)
         result[n] = factors
 
     return result
